@@ -15,6 +15,9 @@ class Pair:
 # '''
 class BasicHashTable:
     def __init__(self, capacity):
+        self.capacity = capacity
+        #self.count = 0
+        self.storage = [None] * capacity
         pass
 
 
@@ -23,6 +26,10 @@ class BasicHashTable:
 # Research and implement the djb2 hash function
 # '''
 def hash(string, max):
+    hash = 5381
+    for i in string:
+        hash = ((hash << 5) + hash) + ord(i)
+    return hash % max
     pass
 
 
@@ -32,6 +39,14 @@ def hash(string, max):
 # If you are overwriting a value with a different key, print a warning.
 # '''
 def hash_table_insert(hash_table, key, value):
+    index = hash(key, hash_table.capacity)
+    pair = Pair(key, value)
+    stored_pair = hash_table.storage[index]
+    if hash_table.storage[index] is not None:
+        if pair.key != stored_pair.key:
+            print(f"Warning: Index at {str(index)} is currently ({hash_table.storage[index]})"). It will be overwritten
+
+    hash_table.storage[index] = pair
     pass
 
 
