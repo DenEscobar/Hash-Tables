@@ -17,6 +17,9 @@ class LinkedPair:
 # '''
 class HashTable:
     def __init__(self, capacity):
+        self.capacity = capacity
+        self.storage = [None] * capacity
+        
         pass
 
 
@@ -24,6 +27,10 @@ class HashTable:
 # Research and implement the djb2 hash function
 # '''
 def hash(string, max):
+    hash = 5381
+    for i in string:
+        hash = ((hash << 5) + hash) + ord(i)
+    return hash % max
     pass
 
 
@@ -33,6 +40,12 @@ def hash(string, max):
 # Hint: Used the LL to handle collisions
 # '''
 def hash_table_insert(hash_table, key, value):
+    index = hash(key, hash_table.capacity)
+    pair = LinkedPair(key, value)
+    stored_pair = hash_table.storage[index]
+    if hash_table.storage[index] is not None:
+        if pair.key != stored_pair.key:
+            print(f"Warning: Index at {str(index)} is currently ({hash_table.storage[index]})). It will be overwritten")
     pass
 
 
@@ -58,6 +71,8 @@ def hash_table_retrieve(hash_table, key):
 # Fill this in
 # '''
 def hash_table_resize(hash_table):
+    if len(hash_table.storage) < hash_table.capacity * .3:
+        hash_table.capacity = hash_table.capacity + ( hash_table.capacity * .5) 
     pass
 
 
