@@ -47,7 +47,9 @@ def hash_table_insert(hash_table, key, value):
         if pair.key != stored_pair.key:
             stored_pair.next = pair
 
-    hash_table.storage[index] = pair
+     
+    else: 
+        hash_table.storage[index] = pair
     pass
 
 
